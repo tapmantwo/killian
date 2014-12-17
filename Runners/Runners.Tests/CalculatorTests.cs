@@ -42,7 +42,7 @@ namespace Runners.Tests
                 With(new Calculator()).
                 Given(c => c.Total = 0).
                 When(c => c.AddValue(1)).
-                AndHappensAgain(Times.Many(9)).
+                Happens(Times.Many(10)).
                 Then(c => Assert.That(c.Total, Is.EqualTo(10))).
                 Run();
         }
@@ -53,7 +53,8 @@ namespace Runners.Tests
             Scenario<Calculator>.
                 With(new Calculator()).
                 Given(c => c.Total = 100).
-                WhenHappensAlot(c => c.SubtractValue(10), Times.Many(5)).
+                When(c => c.SubtractValue(10)).
+                Happens(Times.Many(5)).
                 Then(c => Assert.That(c.Total, Is.EqualTo(50))).
                 Run();
         }

@@ -37,9 +37,9 @@ namespace Runners
             return Given(initialisation);
         }
 
-        public Scenario<T> HasRepeated(Times times)
+        public Scenario<T> HasHappened(Times times)
         {
-            var lastInitialisation = _initialisations.Peek();
+            var lastInitialisation = _initialisations.Dequeue();
             for (var i = 0; i < times; i++)
             {
                 _initialisations.Enqueue(lastInitialisation);
@@ -54,23 +54,14 @@ namespace Runners
             return this;
         }
 
-        public Scenario<T> WhenHappensAlot(Action<T> action, Times times)
-        {
-            for (var i = 0; i < times; i++)
-            {
-                When(action);
-            }
-            return this;
-        }
-
         public Scenario<T> AndWhen(Action<T> action)
         {
             return When(action);
         }
 
-        public Scenario<T> AndHappensAgain(Times times)
+        public Scenario<T> Happens(Times times)
         {
-            var lastOperation = _operations.Peek();
+            var lastOperation = _operations.Dequeue();
             for (var i = 0; i < times; i++)
             {
                 _operations.Enqueue(lastOperation);
