@@ -1,0 +1,9 @@
+D:\dev\github\Killian\Runners\Runners.Tests\bin\Debug\Runners.Tests.dll
+D:\dev\github\Killian\Runners\Runners.Tests\bin\Debug\Runners.Tests.pdb
+D:\dev\github\Killian\Runners\Runners.Tests\bin\Debug\nunit.framework.dll
+D:\dev\github\Killian\Runners\Runners.Tests\bin\Debug\Runners.dll
+D:\dev\github\Killian\Runners\Runners.Tests\bin\Debug\Runners.pdb
+D:\dev\github\Killian\Runners\Runners.Tests\bin\Debug\nunit.framework.xml
+D:\dev\github\Killian\Runners\Runners.Tests\obj\Debug\Runners.Tests.csprojResolveAssemblyReference.cache
+D:\dev\github\Killian\Runners\Runners.Tests\obj\Debug\Runners.Tests.dll
+D:\dev\github\Killian\Runners\Runners.Tests\obj\Debug\Runners.Tests.pdb

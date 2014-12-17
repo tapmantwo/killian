@@ -1,0 +1,5 @@
+D:\dev\github\Killian\Runners\Runners\obj\Debug\Runners.csprojResolveAssemblyReference.cache
+D:\dev\github\Killian\Runners\Runners\bin\Debug\Runners.dll
+D:\dev\github\Killian\Runners\Runners\bin\Debug\Runners.pdb
+D:\dev\github\Killian\Runners\Runners\obj\Debug\Runners.dll
+D:\dev\github\Killian\Runners\Runners\obj\Debug\Runners.pdb
