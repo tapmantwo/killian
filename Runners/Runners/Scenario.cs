@@ -100,6 +100,97 @@ namespace Runners
         }
     }
 
+    public class ScenarioWithResult<T,R>
+    {
+        public static ScenarioWithResult<T,R> With(T subject)
+        {
+            return new ScenarioWithResult<T,R>(subject);
+        }
+
+        private readonly T _subject;
+
+        private R _result;
+
+        private readonly Queue<Action<T>> _initialisations;
+
+        private Func<T,R> _operation;
+
+        private Times _operationTimes;
+
+        private readonly Queue<Action<R>> _assertions;
+
+        private ScenarioWithResult(T subject)
+        {
+            _subject = subject;
+            _initialisations = new Queue<Action<T>>();
+            _assertions = new Queue<Action<R>>();
+            _operationTimes = Times.Once();
+        }
+
+        public ScenarioWithResult<T, R> Given(Action<T> initialisation)
+        {
+            _initialisations.Enqueue(initialisation);
+            return this;
+        }
+
+        public ScenarioWithResult<T, R> AndGiven(Action<T> initialisation)
+        {
+            return Given(initialisation);
+        }
+
+        public ScenarioWithResult<T, R> HasHappened(Times times)
+        {
+            var lastInitialisation = _initialisations.Dequeue();
+            for (var i = 0; i < times; i++)
+            {
+                _initialisations.Enqueue(lastInitialisation);
+            }
+
+            return this;
+        }
+
+        public ScenarioWithResult<T, R> When(Func<T,R> operation)
+        {
+            _operation = operation;
+            return this;
+        }
+
+        public ScenarioWithResult<T, R> Happens(Times times)
+        {
+            _operationTimes = times;
+            return this;
+        }
+
+        public ScenarioWithResult<T, R> Then(Action<R> assertion)
+        {
+            _assertions.Enqueue(assertion);
+            return this;
+        }
+
+        public ScenarioWithResult<T, R> AndThen(Action<R> assertion)
+        {
+            return Then(assertion);
+        }
+
+        public void Run()
+        {
+            while (_initialisations.Count > 0)
+            {
+                _initialisations.Dequeue().Invoke(_subject);
+            }
+
+            for (var operationIndex = 0; operationIndex < _operationTimes; operationIndex++ )
+            {
+                _result = _operation.Invoke(_subject);
+            }
+
+            while (_assertions.Count > 0)
+            {
+                _assertions.Dequeue().Invoke(_result);
+            }
+        }
+    }
+
     public class Times
     {
         private readonly int _howMany;
